@@ -11,6 +11,7 @@ import SignUp from './components/SignUp/SignUp';
 import Appoinment from './components/Appointment/Appoinment';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import AuthProvider from './contexts/AuthProvider';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -37,13 +38,14 @@ function App() {
             <Route path='/signup'>
               <SignUp></SignUp>
             </Route>
-            <Route path='appoint'>
+            <Route path='/appoint'>
               <Appoinment></Appoinment>
             </Route>
             <Route path='*'>
               <PageNotFound></PageNotFound>
             </Route>
           </Switch>
+          <Footer></Footer>
         </Router>
       </AuthProvider>
     </div>
