@@ -10,39 +10,42 @@ import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import Appoinment from './components/Appointment/Appoinment';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import AuthProvider from './contexts/AuthProvider';
 
 function App() {
   return (
     <div>
-      <Router>
-        <Header></Header>
-        <Switch>
-          <Route exact path='/'>
-            <Home></Home>
-          </Route>
-          <Route path='/home'>
-            <Home></Home>
-          </Route>
-          <Route path='/about'>
-            <About></About>
-          </Route>
-          <Route path='/contact'>
-            <Contact></Contact>
-          </Route>
-          <Route path='/login'>
-            <Login></Login>
-          </Route>
-          <Route path='/signup'>
-            <SignUp></SignUp>
-          </Route>
-          <Route path='appoint'>
-            <Appoinment></Appoinment>
-          </Route>
-          <Route path='*'>
-            <PageNotFound></PageNotFound>
-          </Route>
-        </Switch>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Header></Header>
+          <Switch>
+            <Route exact path='/'>
+              <Home></Home>
+            </Route>
+            <Route path='/home'>
+              <Home></Home>
+            </Route>
+            <Route path='/about'>
+              <About></About>
+            </Route>
+            <Route path='/contact'>
+              <Contact></Contact>
+            </Route>
+            <Route path='/login'>
+              <Login></Login>
+            </Route>
+            <Route path='/signup'>
+              <SignUp></SignUp>
+            </Route>
+            <Route path='appoint'>
+              <Appoinment></Appoinment>
+            </Route>
+            <Route path='*'>
+              <PageNotFound></PageNotFound>
+            </Route>
+          </Switch>
+        </Router>
+      </AuthProvider>
     </div>
   );
 }

@@ -5,7 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBriefcaseMedical, faPhone } from '@fortawesome/free-solid-svg-icons';
 import './Header.css';
 import { NavLink } from "react-router-dom";
+import useAuth from '../../hooks/useAuth';
+
 const Header = () => {
+    const { user, logOut } = useAuth();
+    const { displayName, photoURL, email } = user;
     return (
         <div>
             <Navbar bg="light" expand="lg">
@@ -15,7 +19,7 @@ const Header = () => {
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ms-auto">
+                        <Nav className="ms-auto align-items-center">
                             <Nav.Link as={NavLink} to="/home">Home</Nav.Link>
                             <Nav.Link as={NavLink} to="/about">About Us</Nav.Link>
                             <NavDropdown title="Services" id="basic-nav-dropdown">
@@ -30,8 +34,30 @@ const Header = () => {
                                 <FontAwesomeIcon icon={faBriefcaseMedical} />
                                 <Badge className='badge'>0</Badge>
                             </Nav.Link>
-                            <Nav.Link as={NavLink} to="/signup">Sign Up</Nav.Link>
-                            <Nav.Link as={NavLink} to="/login">Sign In</Nav.Link>
+                            {
+                                !displayName ? (
+                                    <>
+                                        <Nav.Link as={NavLink} to="/signup">Sign Up</Nav.Link>
+                                        <Nav.Link as={NavLink} to="/login">Sign In</Nav.Link>
+                                    </>
+                                ) : (
+                                    <NavDropdown
+                                        title={
+                                            <img
+                                                style={{ width: '40px', borderRadius: '50%' }}
+                                                src={user.photoURL}
+                                                alt="" />}
+                                    >
+                                        <div className="text-center mx-2">
+                                            <h5 className="text-center m-2">{displayName}</h5>
+                                            <h6>Account</h6>
+                                            <h6>Appointed</h6>
+                                            <h6>Visited</h6>
+                                            <h6>Settings</h6>
+                                            <button onClick={logOut} className="btn btn-primary mt-2">Sign Out</button>
+                                        </div>
+                                    </NavDropdown>
+                                )}
                             <Nav.Link href="#link" className='custom-logo'>
                                 <FontAwesomeIcon icon={faPhone} />
                             </Nav.Link>
