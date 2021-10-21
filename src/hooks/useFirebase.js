@@ -1,5 +1,5 @@
 import initializeAuthentication from "../Firebase/firebase.initialize";
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, GithubAuthProvider, FacebookAuthProvider, signInWithEmailAndPassword, email, password } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, GithubAuthProvider, FacebookAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
 initializeAuthentication();
 
@@ -13,8 +13,12 @@ const useFirebase = () => {
     const [error, setError] = useState("");
 
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
 
+    const [name, setName] = useState("");
+    const [photo, setPhoto] = useState("");
     //For google sign-in
     const signInWithGoogle = () => {
         signInWithPopup(auth, googleProvider)
@@ -48,7 +52,9 @@ const useFirebase = () => {
 
     //sign in with email and password
 
-    const signInWithEmailandPass = () => {
+    const signInWithEmailandPass = (event) => {
+        event.preventDefault();
+        console.log(email, password);
         signInWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 setUser(result.user);
@@ -57,6 +63,22 @@ const useFirebase = () => {
                 setError(error.message);
             });
     }
+
+    //set name  and profile image url
+    function setNameAndImage() {
+        updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo,
+        }).then(() => {
+
+        }).catch((error) => {
+            // An error occurred
+            // ...
+
+            setError(error.message);
+        });
+    }
+
+
 
     //get the currently sign-inned user 
     useEffect(() => {
@@ -76,6 +98,41 @@ const useFirebase = () => {
                 setError(error.message);
             });
     }
+
+    //this is for sign-up
+    const signUp = (e) => {
+        e.preventDefault();
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((result) => {
+                setNameAndImage();
+                alert("User has been created")
+            }).catch((error) => {
+                setError(error.message);
+            })
+    }
+
+
+    //get name
+    function getName(e) {
+        setName(e?.target?.value);
+    }
+
+
+    //get email
+
+    function getEmail(event) {
+        setEmail(event?.target?.value)
+    }
+    //get password
+    function getPassword(event) {
+        setPassword(event?.target?.value)
+    }
+
+    //get photo
+    function getPhoto(e) {
+        setPhoto(e?.target?.value);
+    }
+
     return {
         signInWithEmailandPass,
         signInWithFacebook,
@@ -84,6 +141,11 @@ const useFirebase = () => {
         signInWithGoogle,
         user,
         error,
+        getEmail,
+        getPassword,
+        signUp,
+        getPhoto,
+        getName,
     };
 }
 

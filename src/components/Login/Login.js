@@ -1,57 +1,89 @@
-import React, { useState } from 'react';
-import { Button, Form, NavLink } from 'react-bootstrap';
+import React from 'react';
+import { Button, Col, Form, FormControl, InputGroup, NavLink, Row } from 'react-bootstrap';
 import useAuth from '../../hooks/useAuth';
 
 import google from './../../assets/images/google-logo.png';
 import facebook from './../../assets/images/facebook-logo.png';
 import github from './../../assets/images/github-logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import { useHistory, useLocation } from 'react-router';
 
 const Login = () => {
 
-    const { signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailandPass, error } = useAuth();
+    const { signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailandPass, error, getEmail, getPassword } = useAuth();
 
+
+    // const location = useLocation();
+    // const history = useHistory();
+    // const redirect = location.state?.from || "/courses";
     return (
-        <div className="my-4">
-            <h2 className="text-center mb-5">Please Login</h2>
-            <p className="text-danger text-center"></p>
+        <div className="text-center my-4">
+            <h2>Please Login</h2>
+            <p className=" mt-2">Login with Email & Password</p>
+            <p className="text-danger text-center">{error}</p>
             <div className="w-25 mx-auto">
-                <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                        </Form.Text>
-                    </Form.Group>
+                <Form onSubmit={signInWithEmailandPass}>
+                    <Row>
+                        <Col className="text-start">
+                            <Form.Label htmlFor="email" visuallyHidden>
+                                Your Email Address
+                            </Form.Label>
+                            <InputGroup className="mb-2">
+                                <InputGroup.Text>
+                                    <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
+                                </InputGroup.Text>
+                                <FormControl
+                                    onBlur={getEmail}
+                                    type="email"
+                                    autoComplete="current-email"
+                                    id="email"
+                                    placeholder="Enter your email address"
+                                />
+                            </InputGroup>
+                        </Col>
+                    </Row>
+                    <Row className="mt-2">
+                        <Col className="text-start">
+                            <Form.Label htmlFor="password" visuallyHidden>
+                                Your Password
+                            </Form.Label>
+                            <InputGroup className="mb-2">
+                                <InputGroup.Text>
+                                    <FontAwesomeIcon icon={faLock}></FontAwesomeIcon>
+                                </InputGroup.Text>
+                                <FormControl
+                                    onBlur={getPassword}
+                                    type="password"
+                                    autoComplete="current-password"
+                                    id="password"
+                                    placeholder="Enter your password"
+                                />
+                            </InputGroup>
+                        </Col>
+                    </Row>
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Show Password" />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Sign In
-                    </Button>
+                    <button type="submit" className="btn btn-primary mt-2 w-100">
+                        Login
+                    </button>
                 </Form>
             </div>
             <p className="mt-2">
                 <NavLink className="text-decoration-none" to="/signup">
-                    Create an Account.
+                    Need an Account? Please Sign up!
                 </NavLink>
             </p>
             <p className="mt-3">Or</p>
-            <p>Login With</p>
+            <p> Login with</p>
             <div>
-                <button>
-                    <img src={google} width='50px' height='50px' borderRadius='50px' alt="google-icon" />
+                <button onClick={signInWithGoogle} className="btn">
+                    <img src={google} width="46px" alt="google-icon" />
                 </button>
-                <button>
-                    <img src={facebook} width='50px' height='50px' borderRadius='50px' alt="facebook-icon" />
+                <button onClick={signInWithFacebook} className="btn">
+                    <img src={facebook} width="45px" alt="facebook-icon" />
                 </button>
-                <button>
-                    <img src={github} width='50px' height='50px' borderRadius='50px' alt="github-icon" />
+                <button onClick={signInWithGithub} className="btn">
+                    <img src={github} width="46px" alt="github-icon" />
                 </button>
             </div>
         </div>
