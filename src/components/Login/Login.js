@@ -10,8 +10,8 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { useHistory, useLocation } from 'react-router';
 
 const Login = () => {
-
-    const { signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailandPass, error, getEmail, getPassword } = useAuth();
+    const { AllContexts } = useAuth();
+    const { signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailandPass, error, getEmail, getPassword } = AllContexts;
 
 
     // const location = useLocation();

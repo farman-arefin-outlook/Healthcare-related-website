@@ -9,8 +9,8 @@ import facebook from './../../assets/images/facebook-logo.png';
 import github from './../../assets/images/github-logo.png';
 
 const SignUp = () => {
-
-    const { signInWithGoogle, signInWithGithub, signInWithFacebook, error, getEmail, getPassword, signUp, getName, getPhoto } = useAuth();
+    const { AllContexts } = useAuth();
+    const { signInWithGoogle, signInWithGithub, signInWithFacebook, error, getEmail, getPassword, signUp, getName, getPhoto } = AllContexts;
     return (
         <div>
             <div className="text-center my-4">
