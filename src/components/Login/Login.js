@@ -72,6 +72,10 @@ const Login = () => {
                 <NavLink className="text-decoration-none" to="/signup">
                     Need an Account? Please Sign up!
                 </NavLink>
+                <br />
+                <NavLink className="text-decoration-none" to="/reset">
+                    Forget Password?
+                </NavLink>
             </p>
             <p className="mt-3">Or</p>
             <p> Login with</p>

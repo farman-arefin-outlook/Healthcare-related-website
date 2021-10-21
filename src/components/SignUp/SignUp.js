@@ -34,7 +34,7 @@ const SignUp = () => {
                                         type="text"
                                         autoComplete="current-name"
                                         id="name"
-                                        placeholder="Enter your email address"
+                                        placeholder="Enter your name"
                                     />
                                 </InputGroup>
                             </Col>
@@ -105,7 +105,7 @@ const SignUp = () => {
                     </Form>
                 </div>
                 <p className="mt-2">
-                    <NavLink className="text-decoration-none" to="/signup">
+                    <NavLink className="text-decoration-none" to="/login">
                         Already have an account? Please Sign In
                     </NavLink>
                 </p>

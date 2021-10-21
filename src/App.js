@@ -12,6 +12,7 @@ import Appoinment from './components/Appointment/Appoinment';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import AuthProvider from './contexts/AuthProvider';
 import Footer from './components/Footer/Footer';
+import Reset from './components/Reset/Reset';
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
             </Route>
             <Route path='/signup'>
               <SignUp></SignUp>
+            </Route>
+            <Route path='/reset'>
+              <Reset></Reset>
             </Route>
             <Route path='/appoint'>
               <Appoinment></Appoinment>

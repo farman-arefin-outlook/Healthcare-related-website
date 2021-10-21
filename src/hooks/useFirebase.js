@@ -1,5 +1,18 @@
 import initializeAuthentication from "../Firebase/firebase.initialize";
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, GithubAuthProvider, FacebookAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+    getAuth,
+    signInWithPopup,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signOut,
+    GithubAuthProvider,
+    FacebookAuthProvider,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    updateProfile,
+    sendEmailVerification,
+    sendPasswordResetEmail,
+} from "firebase/auth";
 import { useEffect, useState } from "react";
 initializeAuthentication();
 
@@ -79,6 +92,28 @@ const useFirebase = () => {
     }
 
 
+    //set email verification
+
+    function emailVerify() {
+        sendEmailVerification(auth.currentUser)
+            .then(() => {
+                alert(`An Verification email has been sent to ${email}`);
+            });
+
+    }
+
+    //password  reset 
+    function resetPass(e) {
+        e.preventDefault();
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                alert('Password reset has been sent');
+            })
+            .catch((error) => {
+                setError(error.message);
+            });
+    }
+
 
     //get the currently sign-inned user 
     useEffect(() => {
@@ -105,6 +140,7 @@ const useFirebase = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 setNameAndImage();
+                emailVerify();
                 alert("User has been created")
             }).catch((error) => {
                 setError(error.message);
@@ -146,6 +182,7 @@ const useFirebase = () => {
         signUp,
         getPhoto,
         getName,
+        resetPass,
     };
 }
 
