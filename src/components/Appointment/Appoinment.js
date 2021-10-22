@@ -20,7 +20,7 @@ const Appoinment = () => {
             <Container>
                 <div className="my-3 d-flex flex-wrap justify-content-between">
                     {
-                        services.map((service) => (<Service service={Service} key={service.key}></Service>))
+                        services.map((service) => (<Service service={service} key={service.key}></Service>))
                     }
                 </div>
             </Container>

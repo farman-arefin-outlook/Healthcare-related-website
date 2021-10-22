@@ -13,6 +13,7 @@ import PageNotFound from './components/PageNotFound/PageNotFound';
 import AuthProvider from './contexts/AuthProvider';
 import Footer from './components/Footer/Footer';
 import Reset from './components/Reset/Reset';
+import Details from './components/Details/Details';
 
 function App() {
   return (
@@ -42,8 +43,11 @@ function App() {
             <Route path='/reset'>
               <Reset></Reset>
             </Route>
-            <Route path='/appoint'>
+            <Route exact path='/appoint'>
               <Appoinment></Appoinment>
+            </Route>
+            <Route path="/appoint/:key">
+              <Details></Details>
             </Route>
             <Route path='*'>
               <PageNotFound></PageNotFound>

@@ -13,9 +13,9 @@ const Header = () => {
     const { displayName, photoURL, email } = user;
     return (
         <div>
-            <Navbar bg="light" expand="lg">
+            <Navbar bg="light" expand="lg" sticky="top">
                 <Container>
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand as={NavLink} to="/home">
                         <img width='250px' height='80px' src={logo} alt="Logo" />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
