@@ -1,12 +1,18 @@
 import React from "react";
 import bgImage from "./../../assets/images/backgroundImg.jpg";
 //import Bg from "./../../assets/images/bg.png";
-import { Container, Button, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 import Bounce from "react-reveal/Bounce";
-import Slide from "react-reveal/Slide";
+
 import { NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import Service from "../Service/Service";
+import Slide from "react-reveal/Zoom";
+
+
+import sectionBg from "./../../assets/images/sectionBg.PNG";
+
 const Home = () => {
     const { services } = useAuth();
     return (
@@ -43,6 +49,25 @@ const Home = () => {
                         </div>
                     </div>
                 </Container>
+                {/* This is section */}
+                <div className="py-5" style={{ background: `url(${sectionBg})` }}>
+                    <div className="text-center text-white">
+                        <Slide left>
+                            <h1 className="text-center text-dark">Featured Services</h1>
+                        </Slide>
+                        <Slide right>
+                            <p className="mb-0 text-center  text-dark mt-2">Here you wil worldclass medical services and you can explore quality services.</p>
+                        </Slide>
+                    </div>
+                    <Container>
+                        <div className="my-3 d-flex flex-wrap justify-content-between">
+                            {
+                                services.slice(0, 6)?.map((service) => (<Service service={service} key={service.key}></Service>))
+                            }
+                        </div>
+                    </Container>
+                </div>
+
             </div>
         </div>
     );

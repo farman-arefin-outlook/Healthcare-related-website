@@ -1,5 +1,7 @@
+import { faBriefcaseMedical } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
@@ -8,27 +10,30 @@ const Details = () => {
 
     const { services } = useAuth();
     const matchingService = services.find((service) => service.key === Number(key));
-    const selected = matchingService?.title;
-    const { img, title, description } = matchingService;
+    // const selected = matchingService?.title;
+    //const { img, title, description } = matchingService;
+
     return (
         <div>
             {
-                title ? (
+                matchingService?.title ? (
                     <Container>
-                        <Row>
+                        <Row className="mb-5">
                             <Col md={6}>
-                                <img className="img-fluid" src={img} alt="" />
+                                <img width="100%" height="60%" className="img-fluid" src={matchingService.img} alt="" />
                             </Col>
-                            <Col>
+                            <Col md={6} className=" justify-content-center">
                                 <Row>
-                                    <h1>{title}</h1>
-                                    <p>{description}</p>
+                                    <h1>{matchingService.title}</h1>
+                                    <p>{matchingService.description}</p>
                                 </Row>
+                                <Button variant="primary"><FontAwesomeIcon icon={faBriefcaseMedical}></FontAwesomeIcon> Admit</Button>
                             </Col>
                         </Row>
                     </Container>
-                ) : (<h1>No Service Found</h1>)
+                ) : (<h1 className="text-center my-5 p-5">No Service Found</h1>)
             }
+
         </div>
     );
 };

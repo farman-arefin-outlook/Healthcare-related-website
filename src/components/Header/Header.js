@@ -8,11 +8,11 @@ import { NavLink } from "react-router-dom";
 import useAuth from '../../hooks/useAuth';
 
 const Header = () => {
-    const { AllContexts } = useAuth();
+    const { AllContexts, selectedCourse } = useAuth();
     const { user, logOut } = AllContexts;
-    const { displayName, photoURL, email } = user;
+    const { displayName } = user;
     return (
-        <div>
+        <div className="sticky-top">
             <Navbar bg="light" expand="lg" sticky="top">
                 <Container>
                     <Navbar.Brand as={NavLink} to="/home">
@@ -34,7 +34,7 @@ const Header = () => {
                             <Nav.Link as={NavLink} to="/contact">Contact Us</Nav.Link>
                             <Nav.Link href="#link" className='custom-logo'>
                                 <FontAwesomeIcon icon={faBriefcaseMedical} />
-                                <Badge className='badge'>0</Badge>
+                                <Badge className='badge'>{selectedCourse.length}</Badge>
                             </Nav.Link>
                             {
                                 !displayName ? (

@@ -1,13 +1,16 @@
 import React from 'react';
-import { Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBriefcaseMedical } from '@fortawesome/free-solid-svg-icons';
 
 import Zoom from "react-reveal/Zoom";
 import './Service.css';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 const Service = ({ service }) => {
     const { img, name, title, description, key } = service;
+
+    const { admit } = useAuth();
     return (
         <div>
             <Zoom>
@@ -22,7 +25,7 @@ const Service = ({ service }) => {
 
                     <Card.Body className="d-flex justify-content-between">
                         <NavLink to={`/appoint/${key}`} className="btn btn-primary me-1">View Details</NavLink>
-                        <Button variant="primary"><FontAwesomeIcon icon={faBriefcaseMedical}></FontAwesomeIcon> Admit</Button>
+                        <Button onClick={() => admit(service)} variant="primary"><FontAwesomeIcon icon={faBriefcaseMedical}></FontAwesomeIcon> Admit</Button>
                     </Card.Body>
                 </Card>
             </Zoom>
