@@ -8,7 +8,7 @@ import './Service.css';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 const Service = ({ service }) => {
-    const { img, name, title, description, key } = service;
+    const { img, title, description, key } = service;
 
     const { admit } = useAuth();
     return (

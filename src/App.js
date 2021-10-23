@@ -14,6 +14,8 @@ import AuthProvider from './contexts/AuthProvider';
 import Footer from './components/Footer/Footer';
 import Reset from './components/Reset/Reset';
 import Details from './components/Details/Details';
+import PrivateRoute from './Route/PrivateRoute';
+import Admit from './components/Admit/Admit';
 
 function App() {
   return (
@@ -34,6 +36,9 @@ function App() {
             <Route path='/contact'>
               <Contact></Contact>
             </Route>
+            <PrivateRoute path="/admit">
+              <Admit></Admit>
+            </PrivateRoute>
             <Route path='/login'>
               <Login></Login>
             </Route>

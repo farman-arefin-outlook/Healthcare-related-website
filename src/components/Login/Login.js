@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Form, FormControl, InputGroup, NavLink, Row } from 'react-bootstrap';
+import { Col, Form, FormControl, InputGroup, NavLink, Row } from 'react-bootstrap';
 import useAuth from '../../hooks/useAuth';
 
 import google from './../../assets/images/google-logo.png';
@@ -11,7 +11,12 @@ import { useHistory, useLocation } from 'react-router';
 
 const Login = () => {
     const { AllContexts } = useAuth();
-    const { signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailandPass, error, getEmail, getPassword } = AllContexts;
+    const { signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailandPass, error, getEmail, getPassword, setUser, setError } = AllContexts;
+
+    const history = useHistory();
+    const location = useLocation();
+    const redirect = location?.state?.from || '/home';
+
 
 
     // const location = useLocation();
@@ -80,7 +85,15 @@ const Login = () => {
             <p className="mt-3">Or</p>
             <p> Login with</p>
             <div>
-                <button onClick={signInWithGoogle} className="btn">
+                <button onClick={() => {
+                    signInWithGoogle()
+                        .then((result) => {
+                            setUser(result.user);
+                            history.push(redirect);
+                        }).catch(error => {
+                            setError(error.message);
+                        });
+                }} className="btn">
                     <img src={google} width="46px" alt="google-icon" />
                 </button>
                 <button onClick={signInWithFacebook} className="btn">

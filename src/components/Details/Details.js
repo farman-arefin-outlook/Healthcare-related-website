@@ -8,7 +8,7 @@ import useAuth from '../../hooks/useAuth';
 const Details = () => {
     const { key } = useParams();
 
-    const { services } = useAuth();
+    const { services, admit } = useAuth();
     const matchingService = services.find((service) => service.key === Number(key));
     // const selected = matchingService?.title;
     //const { img, title, description } = matchingService;
@@ -27,7 +27,9 @@ const Details = () => {
                                     <h1>{matchingService.title}</h1>
                                     <p>{matchingService.description}</p>
                                 </Row>
-                                <Button variant="primary"><FontAwesomeIcon icon={faBriefcaseMedical}></FontAwesomeIcon> Admit</Button>
+                                <Button
+                                    onClick={() => admit(matchingService)}
+                                    variant="primary"><FontAwesomeIcon icon={faBriefcaseMedical}></FontAwesomeIcon> Admit</Button>
                             </Col>
                         </Row>
                     </Container>

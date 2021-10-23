@@ -43,12 +43,8 @@ const useFirebase = () => {
 
     //For google sign-in
     const signInWithGoogle = () => {
-        signInWithPopup(auth, googleProvider)
-            .then((result) => {
-                setUser(result.user);
-            }).catch(error => {
-                setError(error.message);
-            });
+        return signInWithPopup(auth, googleProvider);
+
     }
     //For login with github
     function signInWithGithub() {
@@ -185,7 +181,9 @@ const useFirebase = () => {
         logOut,
         signInWithGoogle,
         user,
+        setUser,
         error,
+        setError,
         getEmail,
         getPassword,
         signUp,

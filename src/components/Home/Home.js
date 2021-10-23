@@ -56,7 +56,7 @@ const Home = () => {
                             <h1 className="text-center text-dark">Featured Services</h1>
                         </Slide>
                         <Slide right>
-                            <p className="mb-0 text-center  text-dark mt-2">Here you wil worldclass medical services and you can explore quality services.</p>
+                            <p className="mb-0 text-center  text-dark mt-2">Here you will get worldclass medical services and you can explore quality services.</p>
                         </Slide>
                     </div>
                     <Container>
